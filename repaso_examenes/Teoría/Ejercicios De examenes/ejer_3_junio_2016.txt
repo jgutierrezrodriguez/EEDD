@@ -1,0 +1,57 @@
+
+APARTADO A
+
+void ListaEnlazada<T>::insertarFinal(VDinamico<T>& v){
+
+	Nodo<T> *nodo = cola;
+	
+	for(int i = 0; i < v.size(); i++){
+		Nodo<T> *nuevo = new Nodo(0,v[i]);
+		nodo->sig = nuevo;
+		cola = nuevo;
+		nodo = nodo->sig;
+	}
+}
+
+int VDinamico<T>::size(){
+	return tamL;
+}
+
+T VDinamico<T>::operator[](int pos){ return v[pos]; }
+
+
+APARTADO B
+
+void MultiABB:insertar(T &dato){
+
+	Nodo<T> *nodo = raiz;
+	bool encontrado = false;
+	
+	while(encontrado == false){
+		if(nodo->datos.getPrimero == dato){
+			nodo->datos.insertarFinal(dato);
+			encontrado = true;
+		}
+		if(nodo->datos.getPrimero < dato){
+			if(nodo->izq != 0){
+				nodo = nodo->izq;
+			}else{
+				Nodo<T> *nuevo = new Nodo(dato);
+				nodo->izq = nuevo;
+				encontrado = true;
+			}
+			
+		}
+		if(nodo->datos.getPrimero > dato){
+			if(nodo->der != 0){
+				nodo = nodo->der;
+			}else{
+				Nodo<T> *nuevo = new Nodo(dato);
+				nodo->der = nuevo;
+				encontrado = true;
+			}
+		}
+	}
+}
+
+T* ListaEnlazada<T>::getPrimero(){ return cabecera; }

@@ -1,0 +1,52 @@
+
+
+vector <T> abb<T>:preodenNR(){
+	
+	stack<*nodo<T> > pila;
+	vector<T> resultado;
+	Nodo<T> *nodo =  raiz;
+	
+	while(nodo != 0 || !pila.empty()){
+	
+		while(nodo != 0){
+		
+		resultado.push_back(nodo->dato);
+		pila.push(nodo);
+		nodo = nodo->izq;
+		
+		}
+		
+		nodo = pila.top();
+		pila.pop();
+		nodo = nodo->der;
+	}
+	
+	return resultado;
+}
+
+vector <T> abb<T>:inordenNR(){
+	
+	stack<*nodo<T> > pila;
+	vector<T> resultado;
+	Nodo<T> *nodo =  raiz;
+	
+	while(nodo != 0 || !pila.empty()){
+	
+		while(nodo != 0){
+		
+		pila.push(nodo);
+		nodo = nodo->izq;
+		
+		}
+		
+		nodo = pila.top();
+		pila.pop();
+		resultado.push_back(nodo->dato);
+		nodo = nodo->der;
+	}
+	
+	return resultado;
+}
+
+
+

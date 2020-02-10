@@ -1,0 +1,149 @@
+APARTADO A
+
+bool ABB<T>::compatibleAVL(){
+	
+	queue<Nodo<T> > cola;
+	Nodo<T> *nodo = raiz;
+	int hijosComprobar = 1;
+	int profundidad = 0;
+	int quitarHijos = 2;
+	int alturaIzq = 0;
+	int alturaDer = 0;
+	int factorCarga;
+	
+	cola.push(raiz);
+	
+	while(!cola.empty()){
+	
+		nodo = cola.top();
+		nodo = cola.pop();
+		
+		if(nodo->izq != 0){
+			cola.push(nodo->izq);
+			quitarHijos--;
+		}
+		if(nodo->der != 0){
+			cola.push(nodo->der);
+			quitarHijos--;
+		}
+		
+		nodo->altura = profundidad;
+		hijosComprobar--;
+		if(nodo->dato < raiz->dato){
+			if(nodo->altura > alturaIzq){
+				alturaIzq = nodo->altura;
+			}
+		}
+		if(nodo->dato > raiz->dato){
+			if(nodo->altura > alturaDer){
+				alturaDer = nodo->altura;
+			}
+		}
+		if(hijosComprobar == 0){
+			profundidad++;
+			hijosComprobar = pow(2,profundidad) - quitarHijos;
+		}	
+	}
+	
+	factorCarga = alturaIzq - alturaDer;
+	
+	if(factorCarga < -1 || factorCarga > 1){
+		return false;
+	}
+	return true;
+
+}
+
+
+	Este ejercicio esta cuajado, va de que ya tiene la altura integrada
+	bool ABB<T>::compatibleAVL(){
+		
+		stack<Nodo<T> > pilaIzq;
+		stack<Nodo<T> > pilaDer;
+		Nodo<T> *nodo1 = raiz;
+		Nodo<T> *nodo2 = raiz;
+		int alturaMaxIzq = 0;
+		int alturaMaxDer = 0;
+		int factorCarga;
+		
+		pilaIzq.push(raiz);
+		pilaDer.push(raiz);
+		
+		while(!pilaDer.empty() && !pilaIzq.empty()){
+			
+			nodo1 = pilaIzq.top();
+			pilaIzq.pop();
+			nodo2 = pilaDer.top();
+			pilaDer.pop();
+			
+			if(nodo1->izq != 0){
+				pilaIzq.push(nodo1->izq);
+				
+			}
+			if(nodo1->der != 0){
+				pilaIzq.push(nodo1->der);
+				
+			}
+			if(nodo2->izq != 0){
+				pilaIzq.push(nodo2->izq);
+				
+			}
+			if(nodo2->der != 0){
+				pilaIzq.push(nodo2->der);
+				
+			}
+			
+			if(nodo1.altura >= alturaMaxIzq){
+				alturaMaxIzq = nodo1.altura;
+			}
+			if(nodo2.altura >= alturaMaxDer){
+				alturaMaxDer = nodo2.altura;
+			}		
+		}
+		
+		factorCarga = alturaMaxDer - alturaMaxIzq;
+		if(factorCarga > 1 || factorCarga < -1){
+			return false;
+		
+		}
+		return true;
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+APARTADO B
+
+
+int buscar(unsigned dato){
+	
+	int pos = dato % nCub;
+	int intento = 0;
+	
+	while(tabla[pos].desbordada != 0 || intento < 5){
+		for(int i = 0; i < tamalog; i++){
+			if(tabla[pos].buffer[i].dato == dato){
+				return pos;
+			}
+		}
+		pos = hash(dato,intento++);
+		
+	}
+	return -1;
+}
+
+
+
+
+
+
+
+	
+	

@@ -1,0 +1,115 @@
+
+
+Ejer 3
+
+APARTADO A
+	
+	2 formas de hacerlo ^^ by: Leinad and JaviGG
+		
+	bool ABB<T>::arbolPerfecto(unsigned h){
+		
+		Nodo<t> *nodo = raiz;
+		stack<Nodo<T> > pila;
+		stack<int> profundidades;
+		int hojasnecesarias = pow(2,h);
+		int profundidad;
+		
+		pila.push(raiz);
+		profundidades.push(0);
+		
+		while(!pila.empty()){
+					
+			nodo = pila.top();
+			pila.pop();
+			profundidad = profundidades.top()
+			profundidades.pop()
+			
+			if(profundidad == h){
+				hojasnecesarias--;
+			}else{
+			
+				if(nodo->izq != 0 && profundidad < h){
+					pila.push(nodo->izq);
+					profundidades.push(profundidad+1);
+				}
+				if(nodo->der != 0 && profundidad < h){
+					pila.push(nodo->der);
+					profundidades.push(profundidad+1);
+				}
+			}
+		}			
+		
+		if(hojasnecesarias == 0){
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
+	bool ABB<T>::arbolPerfecto(unsigned h){
+	
+		Nodo<t> *nodo = raiz;
+		queue<Nodo<T> > cola;
+		int profundidad = 0;
+		int compruebaHijos = 1;
+		cola.push(raiz);
+		
+
+		while(!cola.empty() || profundidad <= h){
+		
+			nodo = cola.top();
+			cola.pop();
+			if(profundidad < h){
+				
+				int numhijos = 0;
+				
+				if(nodo->izq != 0){
+					cola.push(nodo->izq);
+					numhijos++;
+				}
+				
+				if(nodo->der != 0){
+					cola.push(nodo->der);
+					numhijos++;
+				}
+				
+				if(numhijos == 1){
+					return false;
+				}
+			}
+			
+			hijos--;
+			if(compruebaHijos == 0){
+				profundidad++;
+				compruebaHijos= pow(2,profundidad);
+			}	
+		}
+		
+		return true;
+	}
+	
+	
+	
+	
+APARTADO B
+
+	bool buscar(unsigned cp, Central& c){
+	
+		int intento = 0;
+		int pos = hash(cp, intento)
+		
+		while(codigos[pos].est != vacio || intento < maxIntentos){
+		
+			if(*codigos[pos].cc != c){
+				return true;
+			}
+			pos = hash(cp, intento++);
+			
+		}
+		return false;
+		
+	}
+
+
+
